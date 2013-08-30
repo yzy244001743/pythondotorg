@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
+{# Meta information for the doc HEAD #}
+{% block page_title %}Job at {{ object.company.name }} | {{ SITE_INFO.site_name }}{% endblock %}
+{% block og_title %}Job at {{ object.company.name }} | {{ SITE_INFO.site_name }}{% endblock %}
+{# Use when you want to override the defaults set in base.html #}
+{% block page-descript %}{{ object.description|striptags|truncatechars:"156" }}{% endblock %}
+{% block og-descript %}{{ object.description|striptags|truncatechars:"156" }}{% endblock %}
+{% block og-publishedtime %}{% endblock %}
+{% block og-modifiedtime %}{% endblock %}
+{% block og-author %}{# ADD: Link to more jobs by this company... e.g.: /jobs/company/project-evolution #}{% endblock %}
+{% block og-section %}Jobs{% endblock %}
+{% block og-url %}{% endblock %}
+{% block og-image %}{% endblock %}
+
 
 {% block body_attributes %}class="jobs inner single-job"{% endblock %}
 
@@ -19,12 +32,18 @@
 {% block content %}
 {% load companies %}
 <article class="text">
-
+    
+    {% if object.company.logo %}
+    <div class="company-logo">
+         <img src="{{ STATIC_URL }}{{ object.company.logo }}" alt="{{ object.company.name }}" />
+    </div>
+    {% endif %}
+    
 	<h1 class="listing-company">
         <span class="listing-company-name">
-            {% if object.is_new %}<span class="listing-new">New</span>
-            {% if user_can_edit %}<a href="{% url 'jobs:job_edit' pk=object.pk %}">Edit your listing</a>{% endif %}
-            {% endif %}<span class="company-name">{{ object.comapny.name }}</span>
+            {% if object.is_new %}<span class="listing-new">New</span>{% endif %}
+            <span class="company-name">{{ object.company.name }}</span>
+            {% if user_can_edit %}<a class="admin-edit" href="{% url 'jobs:job_edit' pk=object.pk %}">Edit your listing</a>{% endif %}
         </span>
         <span class="listing-location"><a href="{% url 'jobs:job_list_location' slug=object.location_slug %}" title="More jobs in {{ object.city }}, {{ object.region }}">{{ object.city }}, {{ object.region }}, {{ object.country }}</a></span>
     </h1>

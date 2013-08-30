@@ -71,7 +71,7 @@
  * Set all the up-and-coming input text types here for easier reference 
  * Does not include types that are not meant to be displayed full width, such as: 
         type=number, type=range, type=date, type=color
- * Usage: @include input-text-types() { @content }
+ * Usage: #{$form-text-input}
  */
 /* 
  * Cross browser @keyframe definition set 
@@ -182,7 +182,7 @@
  * Set all the up-and-coming input text types here for easier reference 
  * Does not include types that are not meant to be displayed full width, such as: 
         type=number, type=range, type=date, type=color
- * Usage: @include input-text-types() { @content }
+ * Usage: #{$form-text-input}
  */
 /* 
  * Cross browser @keyframe definition set 
@@ -356,9 +356,7 @@
     font-size: 1.125em;
     padding: 1em 1.4em 1.3em; }
 
-  input[type="submit"],
-  input[type="reset"],
-  .button,
+  input[type="submit"], input[type="reset"], input[type="button"], button,
   a.button,
   .button {
     display: inline-block;
@@ -386,7 +384,7 @@
       /* We do this more explictly (the descendant selector) to avoid also styling links in the Supernav content */ }
       .main-navigation .tier-1 > a, .main-navigation .tier-2 > a {
         display: block;
-        padding: .5em 1.5em .4em 1em;
+        padding: 0.5em 1.5em 0.4em 1em;
         position: relative; }
     .main-navigation .tier-1 {
       display: block;
@@ -604,6 +602,9 @@
   .welcome-to-the-foundation {
     padding-left: 8.51064%;
     padding-right: 8.51064%; }
+
+  .jobs-banner {
+    padding: 1.5em 0 2em; }
 
   .main-header {
     /* Shorten the amount of blue space under the nav on inner pages */ }
@@ -1138,7 +1139,7 @@
   /* end @for */
   .content-wrapper {
     /* Increase the amount of white space under the nav on inner pages */ }
-    .inner .content-wrapper {
+    .inner .content-wrapper, .jobs .content-wrapper {
       padding-top: 2em; }
 
   /* Main content with sidebars */
@@ -1213,7 +1214,7 @@
   .pep-list-header,
   .pep-index-list li,
   .info-key {
-    margin: 0 -.5em;
+    margin: 0 -0.5em;
     *zoom: 1; }
     .pep-list-header:after,
     .pep-index-list li:after,
@@ -1384,7 +1385,7 @@
     /* Reset some styles from the drop down menus */ }
     .touch .main-navigation a {
       text-align: center;
-      padding: .65em 1.25em .55em; }
+      padding: 0.65em 1.25em 0.55em; }
     .touch .main-navigation .tier-2 {
       font-size: 0.875em; }
     .touch .main-navigation .subnav {
@@ -1426,14 +1427,14 @@
     height: 72.16px; }
 
   .site-headline {
-    margin: .25em 0 .5em; }
+    margin: 0.25em 0 0.5em; }
 
   .options-bar {
     margin: 0.875em 0; }
 
   .search-field {
     background: white;
-    padding: .4em .5em .3em;
+    padding: 0.4em 0.5em 0.3em;
     margin-right: .5em;
     width: 11em; }
     .search-field:focus {
@@ -1470,25 +1471,25 @@
     padding-top: 1em; }
 
   .about-banner {
-    background: 120% 0 no-repeat url('../img/landing-about.png?1370977946') transparent;
+    background: 120% 0 no-repeat url('../img/landing-about.png?1363296285') transparent;
     min-height: 345px;
     padding-bottom: 3.5em;
     margin-bottom: -2.5em; }
 
   .download-for-current-os {
-    background: 130% 0 no-repeat url('../img/landing-downloads.png?1370977946') transparent;
+    background: 130% 0 no-repeat url('../img/landing-downloads.png?1363149778') transparent;
     min-height: 345px;
     padding-bottom: 4em;
     margin-bottom: -3em; }
 
   .documentation-banner {
-    background: 130% 0 no-repeat url('../img/landing-docs.png?1370977946') transparent;
+    background: 130% 0 no-repeat url('../img/landing-docs.png?1363304389') transparent;
     padding-bottom: 1em; }
 
   .community-banner {
     text-align: left;
     /* Why is this needed? */
-    background: 140% 0 no-repeat url('../img/landing-community.png?1370977946') transparent;
+    background: 140% 0 no-repeat url('../img/landing-community.png?1363149778') transparent;
     padding-bottom: .75em; }
 
   .welcome-to-the-foundation {
@@ -1506,24 +1507,24 @@
 
   .latest-blog-post,
   .featured-event,
-  .jobs-intro {
+  .jobs-banner {
     position: relative;
     text-align: left; }
     .latest-blog-post .call-to-action,
     .featured-event .call-to-action,
-    .jobs-intro .call-to-action {
+    .jobs-banner .call-to-action {
       margin-left: 34.04255%; }
     .latest-blog-post .date-posted, .latest-blog-post .event-date,
     .featured-event .date-posted,
     .featured-event .event-date,
-    .jobs-intro .date-posted,
-    .jobs-intro .event-date {
+    .jobs-banner .date-posted,
+    .jobs-banner .event-date {
       position: absolute;
       left: 0;
       width: 31.91489%; }
     .latest-blog-post .excerpt,
     .featured-event .excerpt,
-    .jobs-intro .excerpt {
+    .jobs-banner .excerpt {
       margin-left: 34.04255%; }
 
   /* Main content with sidebars */
@@ -1584,7 +1585,7 @@
       right: 1em;
       width: 210px;
       height: 210px;
-      background: top left no-repeat url('../img/python-logo-large.png?1375216152') transparent; }
+      background: top left no-repeat url('../img/python-logo-large.png?1375216413') transparent; }
     .psf-widget .widget-title, .psf-widget p {
       margin-right: 34.04255%; }
 
@@ -1631,7 +1632,7 @@
     width: 57.44681%;
     float: left;
     margin-right: 2.12766%; }
-    .listing-company .listing-company-name a:hover:after, .listing-company .listing-company-name a:focus:after {
+    .listing-company .listing-company-name a:not(.admin-edit):hover:after, .listing-company .listing-company-name a:not(.admin-edit):focus:after {
       color: #666666;
       content: " View Details";
       font-size: .75em; }
@@ -1655,16 +1656,25 @@
     #margin-left: -20px; }
 
   /* Forms that are wide enough to have labels and input fields side by side */
-  .wide-form p {
-    overflow: hidden;
-    *zoom: 1; }
-    .wide-form p label {
-      width: 25%;
-      float: left;
-      margin-top: .5em; }
-    .wide-form p input[type=text], .wide-form p input[type=password], .wide-form p input[type=search], .wide-form p input[type=email], .wide-form p input[type=url], .wide-form p input[type=tel] {
+  .wide-form {
+    padding: 1.75em 0; }
+    .wide-form p {
+      overflow: hidden;
+      *zoom: 1; }
+      .wide-form p label {
+        width: 25%;
+        float: left;
+        margin-top: .5em; }
+      .wide-form p input[type="text"], .wide-form p input[type="password"], .wide-form p input[type="search"], .wide-form p input[type="email"], .wide-form p input[type="tel"], .wide-form p input[type="url"], .wide-form p textarea {
+        width: 75%;
+        float: left; }
+    .wide-form p + ul {
       width: 75%;
-      float: left; }
+      float: left;
+      margin-left: 25%; }
+      .wide-form p + ul li {
+        float: left;
+        width: 50%; }
 
   /* Footer */
   .sitemap, .footer-links, .copyright {
@@ -1756,7 +1766,7 @@
       /* We do this more explictly (the descendant selector) to avoid also styling links in the Supernav content */ }
       .main-navigation .tier-1 > a, .main-navigation .tier-2 > a {
         display: block;
-        padding: .5em 1.5em .4em 1em;
+        padding: 0.5em 1.5em 0.4em 1em;
         position: relative; }
     .main-navigation .tier-1 {
       display: block;
@@ -1882,7 +1892,7 @@
       .no-touch .main-navigation .tier-1.element-6, .no-touch .main-navigation .tier-1.element-7 {
         width: auto; }
       .no-touch .main-navigation .tier-1 > a {
-        padding: .65em 1.25em .55em; }
+        padding: 0.65em 1.25em 0.55em; }
     .no-touch .main-navigation .tier-2 {
       font-size: 0.875em; }
 
@@ -2087,17 +2097,17 @@
 
   .latest-blog-post .call-to-action,
   .featured-event .call-to-action,
-  .jobs-intro .call-to-action {
+  .jobs-banner .call-to-action {
     margin-left: 25.53191%; }
   .latest-blog-post .date-posted, .latest-blog-post .event-date,
   .featured-event .date-posted,
   .featured-event .event-date,
-  .jobs-intro .date-posted,
-  .jobs-intro .event-date {
+  .jobs-banner .date-posted,
+  .jobs-banner .event-date {
     width: 23.40426%; }
   .latest-blog-post .excerpt,
   .featured-event .excerpt,
-  .jobs-intro .excerpt {
+  .jobs-banner .excerpt {
     margin-left: 25.53191%; }
 
   .subscription-channels li {
@@ -2181,7 +2191,7 @@
     /* Reset some styles from the drop down menus */ }
     .touch .main-navigation a {
       text-align: center;
-      padding: .65em 1.25em .55em; }
+      padding: 0.65em 1.25em 0.55em; }
     .touch .main-navigation .tier-2 {
       font-size: 0.875em; }
     .touch .main-navigation .subnav {
@@ -2243,12 +2253,12 @@
 
   .latest-blog-post .call-to-action,
   .featured-event .call-to-action,
-  .jobs-intro .call-to-action {
+  .jobs-banner .call-to-action {
     margin-left: 25.53191%;
     margin-right: 8.51064%; }
   .latest-blog-post .excerpt,
   .featured-event .excerpt,
-  .jobs-intro .excerpt {
+  .jobs-banner .excerpt {
     margin-left: 25.53191%;
     margin-right: 8.51064%; }
 

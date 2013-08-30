@@ -120,9 +120,7 @@
         padding: 1em 1.4em 1.3em;
     }
     
-    input[type="submit"], 
-    input[type="reset"], 
-    .button, 
+    #{$form-input-buttons}, 
     a.button, 
     .button {
         display: inline-block;
@@ -208,6 +206,8 @@
     .welcome-to-the-foundation {
         @include pad( 1,1 ); 
     }
+    
+    .jobs-banner { padding: 1.5em 0 2em; }
     
     .main-header {
         
@@ -306,7 +306,7 @@
     .content-wrapper {
         
         /* Increase the amount of white space under the nav on inner pages */
-        .inner & { padding-top: 2em; }
+        .inner &, .jobs & { padding-top: 2em; }
     }
     
     /* Main content with sidebars */
@@ -568,7 +568,7 @@
     
     .latest-blog-post, 
     .featured-event, 
-    .jobs-intro {
+    .jobs-banner {
         position: relative; 
         text-align: left;
         
@@ -680,7 +680,7 @@
         .listing-company-name {
             @include span-columns( 7 ); 
             
-            a:hover:after, a:focus:after {
+            a:not(.admin-edit):hover:after, a:not(.admin-edit):focus:after {
                 color: $grey; 
                 content: " View Details"; 
                 font-size: .75em; 
@@ -701,6 +701,7 @@
     
     /* Forms that are wide enough to have labels and input fields side by side */
     .wide-form {
+        padding: rhythm(1) 0; 
         
         p {
             @include clearfix(); 
@@ -710,9 +711,20 @@
                 float: left; 
                 margin-top: .5em; 
             }
-            @include input_text_types() {
+            #{$form-text-input}, textarea {
                 width: 75%; 
                 float: left; 
+            }
+        }
+        
+        p + ul {
+            width: 75%; 
+            float: left;
+            margin-left: 25%; 
+            
+            li {
+                float: left; 
+                width: 50%; 
             }
         }
     }
@@ -1020,7 +1032,7 @@
     
     .latest-blog-post, 
     .featured-event, 
-    .jobs-intro {
+    .jobs-banner {
         
         .call-to-action { @include pre( 3 ); }
         .date-posted, .event-date { width: columns( 3 ); }
@@ -1121,7 +1133,7 @@
         
     .latest-blog-post, 
     .featured-event, 
-    .jobs-intro {
+    .jobs-banner {
         
         .call-to-action { @include squish( 3, 1 ); }
         .excerpt { @include squish( 3, 1 ); }

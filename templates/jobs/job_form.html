@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
-{% block body_attributes %}class="jobs"{% endblock %}
+{# Meta information for the doc HEAD #}
+{% block page_title %}Submit a Job | {{ SITE_INFO.site_name }}{% endblock %}
+{% block og_title %}Submit a Job | {{ SITE_INFO.site_name }}{% endblock %}
+{# Use when you want to override the defaults set in base.html #}
+{% block page-descript %}{% endblock %}
+{% block og-descript %}{% endblock %}
+{% block og-publishedtime %}{% endblock %}
+{% block og-modifiedtime %}{% endblock %}
+{% block og-author %}{% endblock %}
+{% block og-section %}Jobs{% endblock %}
+{% block og-url %}{% endblock %}
+{% block og-image %}{% endblock %}
+
+
+{% block body_attributes %}class="jobs submit-a-job"{% endblock %}
 
 
 {% block main-nav_attributes %}jobs-navigation{% endblock %}
@@ -13,10 +27,12 @@
 
 
 {% block header_content %}
-<div class="jobs-intro">
-    <h2 class="welcome-message">Get exploring! </h2>
-    <h1 class="call-to-action">340 jobs from 122 companies on the Python Job Board</h1>
-    <p class="excerpt"><strong>Have a job to post?</strong> Please <a href="{% url 'jobs:job_create' %}">fill out this form</a>{% if not request.user.is_authenticated %}, or returning Job Board users may <a href="{% url 'account_login' %}?next={{ request.path }}">log in here</a> to update job postings and create new ones.{% else %}.{% endif %} </p>
+<div class="header-banner">
+    <div class="jobs-banner">
+        <h2 class="welcome-message">Get exploring! </h2>
+        <h1 class="call-to-action">340 jobs from 122 companies on the Python Job Board</h1>
+        <p class="excerpt"><strong>Have a job to post?</strong> Please <a href="{% url 'jobs:job_create' %}">fill out this form</a>{% if not request.user.is_authenticated %}, or returning Job Board users may <a href="{% url 'account_login' %}?next={{ request.path }}">log in here</a> to update job postings and create new ones.{% else %}.{% endif %} </p>
+    </div>
 </div>
 {% endblock header_content %}
 
@@ -25,14 +41,19 @@
 
 
 {% block content %}
-<form action="" method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<p>
-    <button type="submit" name="Submit">Save Draft</button>
-    <button type="submit" name="Submit">Submit for Approval</button>
-</p>
-</form>
+    
+    <article class="text">
+        <h1>Submit a Job to the Python Job Board</h1>
+        <form class="wide-form" action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p class="submit-actions">
+                <button type="submit" name="Submit" class="primary-action">Save Draft</button> 
+                <button type="submit" name="Submit" class="secondary-action">Submit for Approval</button>
+            </p>
+        </form>
+    </article>
+    
 {% endblock content %}
 
 
@@ -41,21 +62,21 @@
 
     <div class="sidebar-widget">
         <h3 class="widget-title">Submit a Job</h3>
-        <p>Have a job that our community would be interested in? Please <a href="{% url 'jobs:job_create' %}">fill out this form</a>, or returning Job Board users may <a href="#">log in here</a> to update job existing postings or to add new ones to their profile.</p>
+        <p>Have a job that our community would be interested in? Please <a href="{% url 'jobs:job_create' %}">fill out this form</a>, or returning Job Board users may <a href="#unresolved">log in here</a> to update job existing postings or to add new ones to their profile.</p>
     </div>
 
     <div class="sidebar-widget">
         <h3 class="widget-title">Featured Companies</h3>
-        <p><a href="#"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
-        <p><a href="#"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
-        <p><a href="#"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
+        <p><a href="#unresolved"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
+        <p><a href="#unresolved"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
+        <p><a href="#unresolved"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
         <p>Want your jobs to be featured? <a href="#">Find out more</a>.</p>
     </div>
 
     <div class="sidebar-widget">
         <h3 class="widget-title">Stay up-to-date</h3>
-        <p><a href="#"><span aria-hidden="true" class="icon-feed"></span>Subscribe via RSS</a></p>
-        <p><a href="#"><span aria-hidden="true" class="icon-twitter"></span>Follow via Twitter</a></p>
+        <p><a href="#unresolved"><span aria-hidden="true" class="icon-feed"></span>Subscribe via RSS</a></p>
+        <p><a href="#unresolved"><span aria-hidden="true" class="icon-twitter"></span>Follow via Twitter</a></p>
     </div>
 
 </aside>

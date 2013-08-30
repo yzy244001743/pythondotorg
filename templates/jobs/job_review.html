@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 
+{# Meta information for the doc HEAD #}
+{% block page_title %}Review Posted Jobs | {{ SITE_INFO.site_name }}{% endblock %}
+{% block og_title %}Review Posted Jobs | {{ SITE_INFO.site_name }}{% endblock %}
+{# Use when you want to override the defaults set in base.html #}
+{% block page-descript %}{% endblock %}
+{% block og-descript %}{% endblock %}
+{% block og-publishedtime %}{% endblock %}
+{% block og-modifiedtime %}{% endblock %}
+{% block og-author %}{% endblock %}
+{% block og-section %}Jobs{% endblock %}
+{% block og-url %}{% endblock %}
+{% block og-image %}{% endblock %}
 
-{% block body_attributes %}class="jobs"{% endblock %}
+
+{% block body_attributes %}class="jobs inner jobpost-under-review"{% endblock %}
 
 
 {% block main-nav_attributes %}jobs-navigation{% endblock %}
 
 
 {% block content %}
-<div class="row">
+<div class="row text">
     <h1>Job Listing Reviews</h1>
 
     <table>

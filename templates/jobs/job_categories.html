@@ -2,7 +2,21 @@
 
 {% extends "base.html" %}
 
-{% block body_attributes %}class="jobs"{% endblock %}
+{# Meta information for the doc HEAD #}
+{% block page_title %}Jobs by category at {{ SITE_INFO.site_name }}{% endblock %}
+{% block og_title %}Jobs by category at {{ SITE_INFO.site_name }}{% endblock %}
+{# Use when you want to override the defaults set in base.html #}
+{% block page-descript %}{% endblock %}
+{% block og-descript %}{% endblock %}
+{% block og-publishedtime %}{% endblock %}
+{% block og-modifiedtime %}{% endblock %}
+{% block og-author %}{% endblock %}
+{% block og-section %}Jobs{% endblock %}
+{% block og-url %}{% endblock %}
+{% block og-image %}{% endblock %}
+
+
+{% block body_attributes %}class="jobs inner jobs-by-category"{% endblock %}
 
 
 {% block main-nav_attributes %}jobs-navigation{% endblock %}
@@ -15,11 +29,6 @@
 
 
 {% block header_content %}
-<div class="jobs-intro">
-    <h2 class="welcome-message">Get exploring! </h2>
-    <h1 class="call-to-action">340 jobs from 122 companies on the Python Job Board</h1>
-    <p class="excerpt"><strong>Have a job to post?</strong> Please <a href="{% url 'jobs:job_create' %}">fill out this form</a>{% if not request.user.is_authenticated %}, or returning Job Board users may <a href="{% url 'account_login' %}?next={{ request.path }}">log in here</a> to update job postings and create new ones.{% else %}.{% endif %} </p>
-</div>
 {% endblock header_content %}
 
 
@@ -27,15 +36,16 @@
 
 
 {% block content %}
-<div class="row">
 
-    <ol class="list-recent-jobs list-row-container menu">
-        {% for cat in categories %}
-            <li><a href="{% url 'jobs:job_list_category' slug=cat.slug %}">{{ cat.name }}</a></li>
-        {% endfor %}
-    </ol>
-
-</div>
+    <div class="row">
+    
+        <ol class="list-recent-jobs list-row-container menu">
+            {% for cat in categories %}
+                <li><a href="{% url 'jobs:job_list_category' slug=cat.slug %}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ol>
+    
+    </div>
 {% endblock content %}
 
 
@@ -49,16 +59,16 @@
 
     <div class="sidebar-widget">
         <h3 class="widget-title">Featured Companies</h3>
-        <p><a href="#"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
-        <p><a href="#"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
-        <p><a href="#"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
+        <p><a href="#unresolved"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
+        <p><a href="#unresolved"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
+        <p><a href="#unresolved"><img src="http://placehold.it/240x80" alt="Placeholder image from placehold.it"></a></p>
         <p>Want your jobs to be featured? <a href="#">Find out more</a>.</p>
     </div>
 
     <div class="sidebar-widget">
         <h3 class="widget-title">Stay up-to-date</h3>
-        <p><a href="#"><span aria-hidden="true" class="icon-feed"></span>Subscribe via RSS</a></p>
-        <p><a href="#"><span aria-hidden="true" class="icon-twitter"></span>Follow via Twitter</a></p>
+        <p><a href="#unresolved"><span aria-hidden="true" class="icon-feed"></span>Subscribe via RSS</a></p>
+        <p><a href="#unresolved"><span aria-hidden="true" class="icon-twitter"></span>Follow via Twitter</a></p>
     </div>
 
 </aside>

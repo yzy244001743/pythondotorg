@@ -179,7 +179,13 @@ dl {
 
 
 /* ! ===== Form elements ===== */
-form { @include pie-clearfix(); }
+form { 
+    @include pie-clearfix(); 
+    
+    ul {
+        @extend .menu; 
+    }
+}
 
 .errorlist {
     @extend .menu; 
@@ -194,7 +200,7 @@ form { @include pie-clearfix(); }
 .error-message { color: $red; }
 
 label {
-    display: block; 
+    display: inline-block; 
     @include leader( .5 );
     @include leader( .125 );
     
@@ -231,20 +237,13 @@ input {
 input:-moz-placeholder { color: $grey-light; font-style: italic; }
 
 /* Not a mistake... I repeat a.button and .button so I do not need to add !important to the color declaration */
-input[type=submit], input[type=reset], button, a.button, .button {
-    @extend %button-style; 
-    display: block; 
-}
+#{$form-input-buttons}, a.button, .button { display: block; }
 
-input[type=reset] {
-    @include vertical-gradient( lighten( $grey-light, 10% ), $grey-light );
-    @include pe-border( $color-top: $border-color, $color-bottom: darken( $grey-light, 10% ) ); 
-    
-    &:hover, &:focus, &:active {
-        color: $white; 
-        @include vertical-gradient( $grey-light, lighten( $grey-light, 10% ) );
-    }
-}
+input[type="submit"], input[type="button"], button, a.button, .button { @extend %button-style-blue; }
+
+input[type="reset"], button.secondary-action { @extend %button-style; }
+
+/*p*/ .submit-actions { padding: rhythm(1) 0; }
 
 b, strong {
     font-weight: normal; 
@@ -330,53 +329,56 @@ abbr, dfn { border-bottom: 1px dotted $blue; }
 }
 
 /* Buttons */
-%button-style {
-    color: darken($grey, 10%) !important;
-    background-color: lighten($grey-light, 20%);
+%shared-button-styles {
     cursor: pointer;
     font-weight: normal;
     margin-bottom: rhythm(.25);
     padding: .4em .75em .35em;
     text-align: left;
-    white-space: nowrap;
+    white-space: nowrap; 
+    @include border-radius(); 
+    
+    & + button { margin-right: .75em; }
+}
+
+%button-style {
+    @extend %shared-button-styles; 
+    color: darken($grey, 10%) !important;
     text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
     @include vertical-gradient( lighten( $grey-light, 25% ), lighten($grey-light, 20%) );
     @include pe-border( $color-top: $border-color, $color-right: $border-color, $color-bottom: $grey-light, $color-left: $border-color );
-    @include border-radius();
     @include box-shadow( 1px 1px 1px rgba(#000, 0.05) , inset 0 0 5px rgba(#fff, 0.5) );
     
     &:hover, &:focus, &:active {
-        background-color: inherit;
+        //background-color: inherit;
         color: darken($grey, 30%) !important;
         @include vertical-gradient( lighten( $grey-light, 30% ), lighten($grey-light, 25%) );
     }
 }
 
 %button-style-yellow {
-    @extend %button-style;
-    background-color: lighten($yellow, 10%);
+    @extend %shared-button-styles;
     @include vertical-gradient( lighten($yellow, 10%), $yellow );
     @include pe-border( $color-top: darken($yellow, 20%), $color-right: darken($yellow, 20%), $color-bottom: darken($yellow, 20%), $color-left: darken($yellow, 20%) );
     
     &:hover, &:active {
-        background-color: inherit;
+        //background-color: inherit;
         @include vertical-gradient( lighten($yellow, 20%), $yellow );
     }
 }
 
 %button-style-blue {
-    @extend %button-style;
+    @extend %shared-button-styles;
     color: $grey-lightest !important;
-    background-color: $blue;
     text-shadow: none;
     @include vertical-gradient( $blue, darken($blue, 10%) );
     @include pe-border( $color-top: lighten($blue, 5%), $color-right: $blue, $color-bottom: $blue, $color-left: lighten($blue, 5%) );
-    @include box-shadow( inset 0 0 5px rgba($blue, 0.2) );
+    @include box-shadow( 1px 1px 1px rgba(#000, 0.05) , inset 0 0 5px rgba(#fff, 0.5) );
     
     &:hover, &:active {
-        background: inherit; 
+        //background: inherit; 
         color: $grey-lighterest !important;
-        @include vertical-gradient(darken($blue, 5%), darken($blue, 15%) );
+        @include vertical-gradient( darken($blue, 5%), darken($blue, 15%) );
     }
 }
 
@@ -466,6 +468,18 @@ h2.not-column {
 
 .indent { padding-left: 2em; }
 
+/*a*/ .admin-edit {
+    display: inline-block; 
+    font-size: .75em; 
+    padding: .4em .5em .2em; 
+    color: $white; 
+    background-color: $red; 
+    
+    &:hover, &:focus, &:active {
+        color: $grey-darker; 
+        background-color: $yellow; 
+    }
+}
 
 /* ! ===== ICONS ===== */
     
@@ -518,21 +532,43 @@ h2.not-column {
         text-align: center;
         padding: .5em .75em .4em; 
         @include adjust-font-size( 16px ); 
+        @include transition( opacity .25s ease-in-out ); 
         
         /* no fallback for .no-generatedcontent. This is a progressive enhancement */
         &:before {
             @include pointer( .5em );
+                top: 0; left: -9999px; 
             border-right-color: transparent;
             border-bottom-color: transparent;
             border-left-color: transparent; 
-            top: 0; 
-            left: -9999px; 
             margin-left: -.25em; 
         }
         
         &:hover, &:focus {
             @extend %hovered-state; 
         }
+        
+        /*
+        Proof of concept, but the browser tooltip on a title="" attribute renders as well, so this effect is redundant. 
+        <li class="psf-meta ">
+            <a href="/psf-landing/" title="The Python Software Foundation">PSF</a>
+        </li>
+        &:after {
+            position: absolute; 
+                top: 100%; 
+            content: attr(title); 
+            color: $white; 
+            background: #222; 
+            background: rgba( #000, .8 ); 
+            padding: .25em; 
+            border: 1px solid #111; 
+            @include border-radius(); 
+            @include opacity( 0 ); 
+        }
+        &:hover:after, &:focus:after {
+            @include opacity( 1 ); 
+            @include transition-delay( .2s );
+        }*/
     }
     
     li {
@@ -886,7 +922,7 @@ a.jump-to-menu {
 .documentation-banner, 
 .latest-blog-post, 
 .featured-event, 
-.jobs-intro {
+.jobs-banner {
     text-align: left; 
 }
 
@@ -962,18 +998,7 @@ a.jump-to-menu {
     li > ul, 
     li > ol { margin-bottom: 0; }
     
-    li {
-        line-height: 1.625em;
-        margin: rhythm(0.15) 0;
-    }
-    
     form {
-        line-height: 1.625em;
-        margin-bottom: rhythm(0.5); 
-        
-        button {
-            @extend %button-style-blue; 
-        }
         
         /* Tricky, but trying to remove bullets from ULs in forms when containing radios or checkboxes */
         label + ul {
@@ -2014,6 +2039,10 @@ $colors: $blue, $psf, $yellow, $green, $purple, $red;
 .listing-company-category, .listing-job-type, .listing-posted {
     clear: both;
     display: block; 
+}
+
+.company-logo {
+    text-align: center; 
 }
 
 
