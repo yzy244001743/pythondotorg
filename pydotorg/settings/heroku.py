@@ -23,7 +23,6 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'sslify.middleware.SSLifyMiddleware',
 ] + MIDDLEWARE
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
@@ -40,6 +39,7 @@ PEP_REPO_PATH = '/srv/pydotorg/peps'
 # Fastly API Key
 FASTLY_API_KEY = os.environ.get('FASTLY_API_KEY')
 
+SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_FASTLY_SSL', '1')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
