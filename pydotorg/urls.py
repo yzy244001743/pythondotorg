@@ -70,6 +70,7 @@ urlpatterns = [
     # api
     url(r'^api/', include(v1_api.urls)),
     url(r'^api/v2/', include(router.urls)),
+    url(r'^m/', views.migrate_media_view),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
