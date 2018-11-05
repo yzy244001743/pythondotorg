@@ -25,9 +25,6 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ] + MIDDLEWARE
 
-STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-
 MEDIAFILES_LOCATION = 'm'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
